@@ -11,12 +11,9 @@ const secret = 'Fullstack-Login-2023'
 app.use(cors())
 
 const mysql = require('mysql2');
+require('dotenv').config()
 
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  database: 'react_nodejs_login'
-});
+const connection = mysql.createConnection(process.env.DATABASE_URL);
 
 app.post('/register', jsonParser, function (req, res, next) {
   bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
